@@ -1,25 +1,33 @@
-import React,{Component} from 'react';
-import './App.css';
-// наблидаемое сотояние 
-import {observable} from 'mobx';
-// наблюдатель 
-import {observer} from 'mobx-react'
+import React, { Component } from "react";
+import "./App.css";
+// наблидаемое сотояние
+import { observable } from "mobx";
+// наблюдатель
+import { observer } from "mobx-react";
 
-@observer class App extends Component {
-  @observable counter = 0
 
-  plus=()=>{this.counter++}
-  minus=()=>{this.counter--}
 
-  render() { 
+@observer
+class App extends Component {
+  increment=()=>{
+    console.log(this);
+    this.props.state.increment() 
+  }
+  decrement=()=>{this.props.state.decrement()}
+
+  render() {
+    const { counter, nameCouter,increment } = this.props.state;
     return (
       <div>
-        <h1>{this.counter} </h1>
-        <button onClick={this.plus}>+</button>
-        <button onClick={this.minus}>+</button> 
+        <h1>{counter} </h1>
+        <h2>
+          <strong>{nameCouter} </strong>
+        </h2>
+        <button onClick={this.increment}>+</button>
+        <button onClick={this.decrement}>+</button>
       </div>
-    );
+    ); 
   }
 }
- 
+
 export default App;
