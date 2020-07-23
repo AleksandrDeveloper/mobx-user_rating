@@ -5,21 +5,19 @@ import App from './App';
 import { observable, computed } from "mobx";
 import * as serviceWorker from './serviceWorker';
 
-const userStore = new class User{
-  @observable name = 'Jon Hill'
-  @observable age = 22
-  @computed get nickName(){
+const userStore = observable({
+  name:'Jon Hill',
+  age:22,
+  plus(){
+    this.age++
+  },
+  minus(){
+    this.age--
+  },
+  get nickName(){
     return `${this.name}&${this.age}`
   }
-}() 
-
-userStore.plus = function(){
-  this.age++
-}
-userStore.minus = function(){
-  this.age--
-}
-
+})
 
 ReactDOM.render(
     <App store={userStore} />,
